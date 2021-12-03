@@ -1,0 +1,21 @@
+{
+  "name": "recipe_app",
+  "version": "1.0.0",
+  "description": "Recipe application",
+  "entry": "index.html",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "author": "Nez Mustafa",
+  "license": "ISC",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.0.1",
+    "parcel": "^2.0.1"
+  },
+  "dependencies": {
+    "core-js": "^3.19.1",
+    "fractional": "^1.0.0",
+    "regenerator-runtime": "^0.13.9"
+  }
+}
