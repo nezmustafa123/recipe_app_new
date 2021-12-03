@@ -64,3 +64,10 @@ export const loadSearchResults = async function (query) {
   }
 };
 // loadSearchResults("pizza");
+
+export const getSearchResultsPage = function (page) {
+  //calculate start and end dymanically
+  const start = (page - 1) * 10; //0;
+  const end = page * 10; //9;
+  return state.search.results.slice(start, end); //slice method does not include last number passed in
+};
