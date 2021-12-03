@@ -9,12 +9,13 @@ export default class View {
     //all views will have this
 
     this._data = data;
-    const markup = this_generateMarkup();
+    const markup = this._generateMarkup();
     this._clear(); //run clear method here
     this._parentElement.insertAdjacentHTML("afterbegin", markup); //inject markup into html afterbegin
   }
   _clear() {
     this._parentElement.innerHTML = "";
+    console.log(this._parentElement);
   }
   renderSpinner() {
     //attach to any parent element passed in here
