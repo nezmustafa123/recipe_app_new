@@ -7,7 +7,10 @@ export default class View {
   _data;
   render(data) {
     //all views will have this
-
+    //when render method called and recieves data check that it exists
+    if (!data || (Array.isArray(data) && data.length === 0))
+      //if no dadta or if there is data but is empty array
+      return this.renderError(); //data still comes back as empty array
     this._data = data;
     const markup = this._generateMarkup();
     this._clear(); //run clear method here
@@ -15,7 +18,6 @@ export default class View {
   }
   _clear() {
     this._parentElement.innerHTML = "";
-    console.log(this._parentElement);
   }
   renderSpinner() {
     //attach to any parent element passed in here

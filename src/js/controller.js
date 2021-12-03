@@ -10,6 +10,9 @@ import "regenerator-runtime/runtime";
 import { async } from "regenerator-runtime";
 //console.log(icons); //path to the file
 
+if (module.hot) {
+  module.hot.accept(); //hot module from parcel
+}
 // https:forkify-api.herokuapp.com/v2
 
 ///////////////////////////////////////
@@ -31,7 +34,8 @@ const controlRecipes = async function () {
     await model.loadRecipe(id); //have to await it returns a promise so have to await it
 
     // 2.Rendering recipe
-    recipeView.render(model.state.recipe); //add render method that takes indata and stores in boject
+    recipeView.render(model.state.recipe); //add render method that takes indata and stores in object
+    // console.log(model.state.recipe);
   } catch (err) {
     //error being caught here
     // alert(err);
@@ -45,14 +49,14 @@ const controlSearchResults = async function () {
 
   try {
     resultsView.renderSpinner(); //render spinner first in results section
-    console.log(resultsView);
+    // console.log(resultsView);
     //Get search query
     const query = searchView.getQuery();
     if (!query) return;
     //load search results
     await model.loadSearchResults(query);
     //render results
-    console.log(model.state.search.results);
+    // console.log(model.state.search.results);
 
     resultsView.render(model.state.search.results);
   } catch (err) {
