@@ -2,6 +2,7 @@ import * as model from "./model.js";
 import recipeView from "./views/recipeView.js";
 import searchView from "./views/searchView.js";
 import resultsView from "./views/resultsView.js";
+import paginationView from "./views/paginationView.js";
 
 // import icons from "../img/icons.svg"; //Parcel 1
 
@@ -59,7 +60,10 @@ const controlSearchResults = async function () {
     // console.log(model.state.search.results);
 
     // resultsView.render(model.state.search.results);
-    resultsView.render(model.getSearchResultsPage()); //start one page one
+    resultsView.render(model.getSearchResultsPage(4)); //start one page one will render 10 items from array depending on page passed into get searchresultspage function
+
+    //render initial pagination buttons
+    paginationView.render(model.state.search);
   } catch (err) {
     console.log(err);
   }

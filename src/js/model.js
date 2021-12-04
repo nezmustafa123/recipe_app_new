@@ -69,7 +69,7 @@ export const loadSearchResults = async function (query) {
 
 export const getSearchResultsPage = function (page = state.search.page) {
   //page will be one by default
-  state.search.page = page;
+  state.search.page = page; //changes the page in state
   //doesnt' need to be async function reach into state and get data for page being
   //calculate start and end dymanically page-1 * 10 is 0, 1 * 10 is 10
   const start = (page - 1) * state.search.resultsPerPage; // extract to 0;
