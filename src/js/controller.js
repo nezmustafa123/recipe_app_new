@@ -11,7 +11,7 @@ import { async } from "regenerator-runtime";
 //console.log(icons); //path to the file
 
 if (module.hot) {
-  module.hot.accept(); //hot module from parcel
+  module.hot.accept(); //hot module reload from parcel
 }
 // https:forkify-api.herokuapp.com/v2
 
@@ -58,7 +58,8 @@ const controlSearchResults = async function () {
     //render results
     // console.log(model.state.search.results);
 
-    resultsView.render(model.state.search.results);
+    // resultsView.render(model.state.search.results);
+    resultsView.render(model.getSearchResultsPage()); //start one page one
   } catch (err) {
     console.log(err);
   }

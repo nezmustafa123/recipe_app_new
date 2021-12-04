@@ -1,5 +1,5 @@
 import { runtime } from "../../node_modules/regenerator-runtime";
-import { API_URL } from "./config.js";
+import { API_URL, RES_PER_PAGE } from "./config.js";
 import { getJSON } from "./helpers.js";
 
 //refactor into architecture
@@ -10,6 +10,8 @@ export const state = {
   search: {
     query: "",
     results: [],
+    page: 1,
+    resultsPerPage: RES_PER_PAGE,
   },
 };
 
@@ -65,9 +67,12 @@ export const loadSearchResults = async function (query) {
 };
 // loadSearchResults("pizza");
 
-export const getSearchResultsPage = function (page) {
-  //calculate start and end dymanically
-  const start = (page - 1) * 10; //0;
-  const end = page * 10; //9;
+export const getSearchResultsPage = function (page = state.search.page) {
+  //page will be one by default
+  state.search.page = page;
+  //doesnt' need to be async function reach into state and get data for page being
+  //calculate start and end dymanically page-1 * 10 is 0, 1 * 10 is 10
+  const start = (page - 1) * state.search.resultsPerPage; // extract to 0;
+  const end = page * state.search.resultsPerPage; // extract to 9;
   return state.search.results.slice(start, end); //slice method does not include last number passed in
 };
