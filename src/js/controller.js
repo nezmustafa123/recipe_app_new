@@ -60,7 +60,7 @@ const controlSearchResults = async function () {
     // console.log(model.state.search.results);
 
     // resultsView.render(model.state.search.results);
-    resultsView.render(model.getSearchResultsPage(4)); //start one page one will render 10 items from array depending on page passed into get searchresultspage function
+    resultsView.render(model.getSearchResultsPage(3)); //start one page one will render 10 items from array depending on page passed into get searchresultspage function
 
     //render initial pagination buttons
     paginationView.render(model.state.search);
@@ -69,8 +69,12 @@ const controlSearchResults = async function () {
   }
 };
 
-const controlPagination = function () {
-  console.log("Pagination controller");
+const controlPagination = function (goToPage) {
+  console.log("gotToPage");
+  //render new results
+  resultsView.render(model.getSearchResultsPage(goToPage)); //page gets updated in this function runder overrideds marlui that was there precviously
+  //render new pagination buttons
+  paginationView.render(model.state.search);
 };
 // controlSearchResults();
 

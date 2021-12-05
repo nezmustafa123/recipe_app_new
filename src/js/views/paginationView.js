@@ -8,12 +8,15 @@ class PaginationView extends View {
   addHandlerClick(handler) {
     this._parentElement.addEventListener("click", function (e) {
       const btn = e.target.closest(".btn--inline");
-      console.log(btn);
-      handler();
+      if (!btn) return; //if no button return immedietely
+      // console.log(btn);
+      const goToPage = +btn.dataset.goto; //get page from button pass number into controller
+      console.log(goToPage);
+      handler(goToPage);
     });
   }
   _generateMarkup() {
-    const curPage = this._data.page;
+    const curPage = this._data.page; //data is the state.search object
     //render method will call this
     //num of results divided by number of results per page
     const numPages = Math.ceil(
