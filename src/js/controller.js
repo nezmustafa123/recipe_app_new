@@ -68,11 +68,16 @@ const controlSearchResults = async function () {
     console.log(err);
   }
 };
+
+const controlPagination = function () {
+  console.log("Pagination controller");
+};
 // controlSearchResults();
 
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
   searchView.addHandlerSearch(controlSearchResults);
+  paginationView.addHandlerClick(controlPagination);
 };
 init();
 //init function runds and runs addHAndler render handlr render listes for events
