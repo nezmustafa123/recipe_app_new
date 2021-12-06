@@ -33,7 +33,7 @@ export const loadRecipe = async function (id) {
       cookingTime: recipe.cooking_time,
       ingredients: recipe.ingredients,
     };
-    // console.log(state.recipe);
+    console.log(state);
   } catch (err) {
     //Temp error handling error comes from getjson consequence of first error
     console.error(`${err} xxxx`);
@@ -80,7 +80,7 @@ export const getSearchResultsPage = function (page = state.search.page) {
 export const updateServings = function (newServings) {
   //take in servings reach into the state, recipe ingredients change quantity in each ingredient
   state.recipe.ingredients.forEach((ing) => {
-    ing.quantity = ing.quantity * (newServings / state.recipe.servings);
+    ing.quantity = ing.quantity * (newServings / state.recipe.servings); //multipy by ratio
 
     // newQt = oldQt * newServings/ oldServings // 2 * 8 / 4 = 4
   });

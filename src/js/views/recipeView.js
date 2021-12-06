@@ -15,6 +15,19 @@ class RecipeView extends View {
     );
   }
 
+  addHandlerUpdateServings(handler) {
+    //event delegation
+    this._parentElement.addEventListener("click", function (e) {
+      //look for closest button tiny element
+      const btn = e.target.closest(".btn--update-servings");
+      if (!btn) return;
+      console.log(btn);
+      const updateTo = +btn.dataset.updateTo; //when there's a dash will be concerted to camel case too
+      console.log(updateTo);
+      if (updateTo > 0) handler(updateTo);
+    });
+  }
+
   //run same eventhandler for diffferent events
   //loop through and change events
   // window.addEventListener("hashchange", controlRecipes);
@@ -55,12 +68,16 @@ class RecipeView extends View {
       <span class="recipe__info-text">servings</span>
 
       <div class="recipe__info-buttons">
-        <button class="btn--tiny btn--increase-servings">
+        <button class="btn--tiny btn--update-servings" data-update-to="${
+          this._data.servings - 1
+        }">
           <svg>
             <use href="${icons}#icon-minus-circle"></use>
           </svg>
         </button>
-        <button class="btn--tiny btn--increase-servings">
+        <button class="btn--tiny btn--update-servings" data-update-to="${
+          this._data.servings + 1
+        } ">
           <svg>
             <use href="${icons}#icon-plus-circle"></use>
           </svg>

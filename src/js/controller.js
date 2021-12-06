@@ -37,7 +37,7 @@ const controlRecipes = async function () {
     // 2.Rendering recipe
     recipeView.render(model.state.recipe); //add render method that takes indata and stores in object
     // console.log(model.state.recipe);
-    controlServings(); //TEST
+    // controlServings(); //TEST
   } catch (err) {
     //error being caught here
     // alert(err);
@@ -79,16 +79,17 @@ const controlPagination = function (goToPage) {
 };
 // controlSearchResults();
 
-const controlServings = function () {
+const controlServings = function (newServing) {
   //another event handler run when some event happens
   //update the recipe servings (in state)
-  model.updateServings(4);
+  model.updateServings(newServing);
   //update the recipe view
 
-  recipeView.render(model.state.recipe); //re-render recipe
+  recipeView.render(model.state.recipe); //re-render recipe with new state from update servings
 };
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
+  recipeView.addHandlerUpdateServings(controlServings);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
 };
