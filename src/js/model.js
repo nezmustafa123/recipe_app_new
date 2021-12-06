@@ -76,3 +76,13 @@ export const getSearchResultsPage = function (page = state.search.page) {
   const end = page * state.search.resultsPerPage; // extract to 9;
   return state.search.results.slice(start, end); //slice method does not include last number passed in
 };
+
+export const updateServings = function (newServings) {
+  //take in servings reach into the state, recipe ingredients change quantity in each ingredient
+  state.recipe.ingredients.forEach((ing) => {
+    ing.quantity = ing.quantity * (newServings / state.recipe.servings);
+
+    // newQt = oldQt * newServings/ oldServings // 2 * 8 / 4 = 4
+  });
+  state.recipe.servings = newServings; //updaete the servings in the state at the end with new value
+};

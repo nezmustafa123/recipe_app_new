@@ -16,7 +16,7 @@ class PaginationView extends View {
     });
   }
   _generateMarkup() {
-    const curPage = this._data.page; //data is the state.search object
+    const curPage = this._data.page; //data is the state.search object page gets update through getsearch results method
     //render method will call this
     //num of results divided by number of results per page
     const numPages = Math.ceil(
