@@ -16,9 +16,22 @@ export default class View {
     this._clear(); //run clear method here
     this._parentElement.insertAdjacentHTML("afterbegin", markup); //inject markup into html afterbegin
   }
+  update(data) {
+    if (!data || (Array.isArray(data) && data.length === 0))
+      return this.renderError();
+    this._data = data;
+    const newMarkup = this._generateMarkup(); //generate new markup and compare new html to old and change tags and attributes
+
+    //create new dom object
+    const newDOM = document.createRange().createContextualFragment(newMarkup); // creates virtual dom with real dom node objects
+    const newElements = newDOM.querySelectorAll("*");
+    console.log(newElements); //compare nre dom to current dom
+  }
+
   _clear() {
     this._parentElement.innerHTML = "";
   }
+
   renderSpinner() {
     //attach to any parent element passed in here
     const markup = `

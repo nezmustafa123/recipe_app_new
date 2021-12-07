@@ -85,7 +85,9 @@ const controlServings = function (newServing) {
   model.updateServings(newServing);
   //update the recipe view
 
-  recipeView.render(model.state.recipe); //re-render recipe with new state from update servings
+  // recipeView.render(model.state.recipe); //re-render recipe with new state from update servings
+  //update tags and attributes in the dom withouth rerendering (update method)
+  recipeView.update(model.state.recipe); //re-render recipe with new state from update servings
 };
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
