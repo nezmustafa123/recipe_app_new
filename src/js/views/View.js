@@ -24,8 +24,25 @@ export default class View {
 
     //create new dom object
     const newDOM = document.createRange().createContextualFragment(newMarkup); // creates virtual dom with real dom node objects
-    const newElements = newDOM.querySelectorAll("*");
-    console.log(newElements); //compare nre dom to current dom
+    const newElements = Array.from(newDOM.querySelectorAll("*"));
+    const curElements = Array.from(this._parentElement.querySelectorAll("*")); //convert from nodelist to array
+    // console.log(curElements);
+    // console.log(newElements); //compare new dom to current dom
+    newElements.forEach((newEl, i) => {
+      //loop over two arrays at the same time give cur element same index
+      const curEl = curElements[i];
+      console.log(curEl, newEl.isEqualNode(curEl)); //compare nodes current one with old one
+
+      if (
+        !newEl.isEqualNode(curEl) &&
+        newEl.firstChild.nodeValue.trim() !== ""
+      ) {
+        //first childnode is text node
+        //if new element NOT equal to current element
+        console.log(`x`);
+        curEl.textContent = newEl.textContent; //just doing this replaces container entireley
+      }
+    });
   }
 
   _clear() {
