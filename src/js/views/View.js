@@ -33,14 +33,25 @@ export default class View {
       const curEl = curElements[i];
       console.log(curEl, newEl.isEqualNode(curEl)); //compare nodes current one with old one
 
+      //update changed text
       if (
         !newEl.isEqualNode(curEl) &&
-        newEl.firstChild.nodeValue.trim() !== ""
+        newEl.firstChild?.nodeValue.trim() !== ""
       ) {
+        //check if the element has only text (text node)
         //first childnode is text node
         //if new element NOT equal to current element
-        console.log(`x`);
-        curEl.textContent = newEl.textContent; //just doing this replaces container entireley
+        // console.log(`x`, newEl.firstChild.nodeValue.trim());
+        curEl.textContent = newEl.textContent; //just doing this replaces container text content entireley
+      } //get text out of element if no text the replacemend doesn't happen
+
+      //update changed attributes
+
+      if (!newEl.isEqualNode(curEl)) {
+        // console.log(Array.from(newEl.attributes)); //log attributes propery of all elements that have changed convert this object to array
+        Array.from(newEl.attributes).forEach((attr) =>
+          curEl.setAttribute(attr.name, attr.value)
+        );
       }
     });
   }
