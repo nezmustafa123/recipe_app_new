@@ -17,8 +17,8 @@ export default class View {
     this._parentElement.insertAdjacentHTML("afterbegin", markup); //inject markup into html afterbegin
   }
   update(data) {
-    if (!data || (Array.isArray(data) && data.length === 0))
-      return this.renderError();
+    // if (!data || (Array.isArray(data) && data.length === 0))
+    //   return this.renderError();
     this._data = data;
     const newMarkup = this._generateMarkup(); //generate new markup and compare new html to old and change tags and attributes
 

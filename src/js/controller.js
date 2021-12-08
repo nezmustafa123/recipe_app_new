@@ -30,6 +30,9 @@ const controlRecipes = async function () {
     //render spinner
     recipeView.renderSpinner();
 
+    // update results view to mark selected search result
+    resultsView.update(model.getSearchResultsPage());
+
     //1 loading recipe
     //stores
     await model.loadRecipe(id); //have to await it returns a promise so have to await it
