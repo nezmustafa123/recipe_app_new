@@ -13,6 +13,8 @@ export const state = {
     page: 1,
     resultsPerPage: RES_PER_PAGE,
   },
+  bookmarks: [],
+  //add a book mark push recipe into array
 };
 
 export const loadRecipe = async function (id) {
@@ -60,7 +62,7 @@ export const loadSearchResults = async function (query) {
       };
     });
     state.search.page = 1; //reset the page in the state to one after loading the search results
-    console.log(state.search.results);
+    console.log(state.search.page);
   } catch (err) {
     console.error(`${err} xxxx`);
     throw err;
@@ -86,4 +88,14 @@ export const updateServings = function (newServings) {
     // newQt = oldQt * newServings/ oldServings // 2 * 8 / 4 = 4
   });
   state.recipe.servings = newServings; //updaete the servings in the state at the end with new value
+};
+
+export const addBookMark = function (recipe) {
+  //set recipe as a bookmark push to array
+  state.bookmarks.push(recipe);
+  //if current recipe has same recipe as one passed in mark current recipe as bookmark
+
+  if (recipe.id === state.recipe.id) {
+    state.recipe.bookmarked = true; //set new property on recipe object
+  }
 };

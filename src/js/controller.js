@@ -64,7 +64,7 @@ const controlSearchResults = async function () {
     // console.log(model.state.search.results);
 
     // resultsView.render(model.state.search.results);
-    resultsView.render(model.getSearchResultsPage(3)); //start one page one will render 10 items from array depending on page passed into get searchresultspage function
+    resultsView.render(model.getSearchResultsPage()); //start one page one will render 10 items from array depending on page passed into get searchresultspage function
 
     //render initial pagination buttons
     paginationView.render(model.state.search);
@@ -92,9 +92,17 @@ const controlServings = function (newServing) {
   //update tags and attributes in the dom withouth rerendering (update method)
   recipeView.update(model.state.recipe); //re-render recipe with new state from update servings
 };
+
+const controlAddBookmark = function () {
+  //controller for adding new bookmark
+  model.addBookMark(model.state.recipe);
+  console.log(model.state.recipe);
+};
+
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
   recipeView.addHandlerUpdateServings(controlServings);
+  recipeView.addHandlerAddBookmark(controlAddBookmark);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
 };

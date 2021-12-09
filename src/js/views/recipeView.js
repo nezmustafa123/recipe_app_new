@@ -9,11 +9,16 @@ class RecipeView extends View {
   _searchMessage = "";
 
   addHandlerRender(handler) {
-    //
+    //run same eventhandler for diffferent events
     ["hashchange", "load"].forEach((ev) =>
       window.addEventListener(ev, handler)
     );
   }
+  //loop through and change events
+  // window.addEventListener("hashchange", controlRecipes);
+  // //run show recipe function (control recipes) whenever hash changes
+  // window.addEventListener("load", controlRecipes);
+  // //event for entire page loading fired off when page loads
 
   addHandlerUpdateServings(handler) {
     //event delegation
@@ -28,12 +33,17 @@ class RecipeView extends View {
     });
   }
 
-  //run same eventhandler for diffferent events
-  //loop through and change events
-  // window.addEventListener("hashchange", controlRecipes);
-  // //run show recipe function (control recipes) whenever hash changes
-  // window.addEventListener("load", controlRecipes);
-  // //event for entire page loading fired off when page loads
+  //
+  addHandlerAddBookmark(handler) {
+    this._parentElement.addEventListener("click", function (e) {
+      //button doesn't exist by the time app is loaded can't add event listener to element that doesn't exist
+      //listen to event on parent element see if event happens on element looking for
+      const btn = e.target.closest(".btn--bookmark");
+      console.log(btn);
+      if (!btn) return;
+      handler();
+    });
+  }
 
   _generateMarkup() {
     // console.log(this_data);
@@ -88,9 +98,9 @@ class RecipeView extends View {
     <div class="recipe__user-generated">
       
     </div>
-    <button class="btn--round">
+    <button class="btn--round btn--bookmark">
       <svg class="">
-        <use href="${icons}#icon-bookmark-fill"></use>
+        <use href="${icons}#icon-bookmark"></use>
       </svg>
     </button>
   </div>
