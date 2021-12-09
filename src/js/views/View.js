@@ -31,7 +31,7 @@ export default class View {
     newElements.forEach((newEl, i) => {
       //loop over two arrays at the same time give cur element same index
       const curEl = curElements[i];
-      console.log(curEl, newEl.isEqualNode(curEl)); //compare nodes current one with old one
+      //console.log(curEl, newEl.isEqualNode(curEl)); //compare nodes current one with old one
 
       //update changed text
       if (

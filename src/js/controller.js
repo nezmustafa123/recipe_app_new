@@ -95,8 +95,11 @@ const controlServings = function (newServing) {
 
 const controlAddBookmark = function () {
   //controller for adding new bookmark
-  model.addBookMark(model.state.recipe);
-  console.log(model.state.recipe);
+  if (!model.state.recipe.bookmarked) model.addBookMark(model.state.recipe);
+  //if not bookmarked add bookmark
+  else model.deleteBookMark(model.state.recipe.id); //if book marked delete bookmark
+  // console.log(model.state.recipe);
+  recipeView.update(model.state.recipe);
 };
 
 const init = function () {

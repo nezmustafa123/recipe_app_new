@@ -35,6 +35,14 @@ export const loadRecipe = async function (id) {
       cookingTime: recipe.cooking_time,
       ingredients: recipe.ingredients,
     };
+    //check to see if same recipe in bookmarks array
+    if (state.bookmarks.some((bookmark) => bookmark.id === id)) {
+      //equal to the id recieved in the function
+      state.recipe.bookmarked = true;
+    } else {
+      state.recipe.bookmarked = false;
+    }
+
     console.log(state);
   } catch (err) {
     //Temp error handling error comes from getjson consequence of first error
@@ -92,10 +100,22 @@ export const updateServings = function (newServings) {
 
 export const addBookMark = function (recipe) {
   //set recipe as a bookmark push to array
-  state.bookmarks.push(recipe);
+  state.bookmarks.push(recipe); //push to state
   //if current recipe has same recipe as one passed in mark current recipe as bookmark
 
   if (recipe.id === state.recipe.id) {
     state.recipe.bookmarked = true; //set new property on recipe object
+  }
+};
+
+export const deleteBookMark = function (id) {
+  //delete recipe with this id from bookmarks array
+  //when add something get data when delete get entire id
+  const index = state.bookmarks.findIndex((el) => el.id === id); //get index of recipe with same id as id passed in in the bookmark array
+  state.bookmarks.splice(index, 1); //index and items to be deleted which is one
+
+  //mark current recipe as not
+  if (id === state.recipe.id) {
+    state.recipe.bookmarked = false;
   }
 };
