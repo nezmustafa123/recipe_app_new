@@ -3,6 +3,7 @@ import recipeView from "./views/recipeView.js";
 import searchView from "./views/searchView.js";
 import resultsView from "./views/resultsView.js";
 import paginationView from "./views/paginationView.js";
+import bookmarksView from "./views/bookmarksView.js";
 
 // import icons from "../img/icons.svg"; //Parcel 1
 
@@ -32,7 +33,8 @@ const controlRecipes = async function () {
 
     // update results view to mark selected search result
     resultsView.update(model.getSearchResultsPage());
-
+    //update bookmarks iew to mark selected bookmark
+    bookmarksView.update(model.state.bookmarks);
     //1 loading recipe
     //stores
     await model.loadRecipe(id); //have to await it returns a promise so have to await it
@@ -95,11 +97,15 @@ const controlServings = function (newServing) {
 
 const controlAddBookmark = function () {
   //controller for adding new bookmark
+  //add/remove bookmarks
   if (!model.state.recipe.bookmarked) model.addBookMark(model.state.recipe);
   //if not bookmarked add bookmark
   else model.deleteBookMark(model.state.recipe.id); //if book marked delete bookmark
   // console.log(model.state.recipe);
+  //update recipe view
   recipeView.update(model.state.recipe);
+  //render bookmarks
+  bookmarksView.render(model.state.bookmarks);
 };
 
 const init = function () {

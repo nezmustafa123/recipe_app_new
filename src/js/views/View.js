@@ -5,7 +5,7 @@ export default class View {
   //create other views as instances of it
   //export class itself will not create instance of it
   _data;
-  render(data) {
+  render(data, render = true) {
     //all views will have this
     //when render method called and recieves data check that it exists
     if (!data || (Array.isArray(data) && data.length === 0))

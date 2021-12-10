@@ -24,6 +24,7 @@ export const loadRecipe = async function (id) {
 
     //create new object get rid of underscores
     const { recipe } = data.data; //recipe object destructure it
+    console.log(recipe);
     state.recipe = {
       //update state object and manipulate directly
       id: recipe.id,
