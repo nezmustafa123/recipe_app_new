@@ -24,7 +24,7 @@ class PreviewView extends View {
           </li>
     `;
   }
-}
+} //seperate the markup into a seperate view identidal markup to the reults view
 
 export default new PreviewView();
-//only generate one preview element
+//only generate one preview element for the bookmark or results view

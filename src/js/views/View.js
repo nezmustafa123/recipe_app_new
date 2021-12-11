@@ -13,6 +13,8 @@ export default class View {
       return this.renderError(); //data still comes back as empty array
     this._data = data;
     const markup = this._generateMarkup();
+
+    if (!render) return markup;
     this._clear(); //run clear method here
     this._parentElement.insertAdjacentHTML("afterbegin", markup); //inject markup into html afterbegin
   }

@@ -15,7 +15,7 @@ class BookmarksView extends View {
     return this._data
       .map((bookmark) => previewView.render(bookmark, false))
       .join("");
-  }
+  } //previewview
 }
 //return markup as a string
 //loop through render preview bookmarks as string inject into the dom

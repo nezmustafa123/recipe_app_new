@@ -1,4 +1,5 @@
 import View from "./View.js";
+import previewView from "./previewView.js";
 import icons from "url:../../img/icons.svg";
 
 class ResultsView extends View {
@@ -11,28 +12,36 @@ class ResultsView extends View {
   _generateMarkup() {
     //needs this method to user in render method
     console.log(this._data); //loop through create string with preview blocks for each data result
-    return this._data.map(this._generateMarkupPreview).join(""); //instead of writing the code into the map method just call the other method inside it
-  }
-
-  _generateMarkupPreview(result) {
-    //if result id is same as current id in url give class
-    const id = window.location.hash.slice(1); //get id from first element
-    return `
-    <li class="preview">
-            <a class="preview__link ${
-              result.id === id ? "preview__link--active" : ""
-            }"  href="#${result.id}">
-              <figure class="preview__fig">
-                <img src="${result.image}" alt="Test" />
-              </figure>
-              <div class="preview__data">
-                <h4 class="preview__title">${result.title}</h4>
-                <p class="preview__publisher">${result.publisher}</p>
-              </div>
-            </a>
-          </li>
-    `;
-  }
+    return this._data
+      .map((result) => previewView.render(result, false))
+      .join("");
+  } //previewview
 }
 
 export default new ResultsView();
+
+// _generateMarkup() {
+//   //needs this method to use in render method
+//   console.log(this._data); //loop through create string with preview blocks for each data result
+//   return this._data.map(this._generateMarkupPreview).join(""); //instead of writing the code into the map method just call the other method inside it
+// }
+
+// _generateMarkupPreview(result) {
+//   //if result id is same as current id in url give class
+//   const id = window.location.hash.slice(1); //get id from first element
+//   return `
+//   <li class="preview">
+//           <a class="preview__link ${
+//             result.id === id ? "preview__link--active" : ""
+//           }"  href="#${result.id}">
+//             <figure class="preview__fig">
+//               <img src="${result.image}" alt="Test" />
+//             </figure>
+//             <div class="preview__data">
+//               <h4 class="preview__title">${result.title}</h4>
+//               <p class="preview__publisher">${result.publisher}</p>
+//             </div>
+//           </a>
+//         </li>
+//   `;
+// }
