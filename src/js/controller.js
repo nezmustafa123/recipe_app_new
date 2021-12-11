@@ -31,10 +31,12 @@ const controlRecipes = async function () {
     //render spinner
     recipeView.renderSpinner();
 
-    // update results view to mark selected search result
+    //update results view to mark selected search result
     resultsView.update(model.getSearchResultsPage());
+
     //update bookmarks view to mark selected bookmark in bookmarks panel
     bookmarksView.update(model.state.bookmarks);
+
     //1 loading recipe
     //stores
     await model.loadRecipe(id); //have to await it returns a promise so have to await it
@@ -108,7 +110,13 @@ const controlAddBookmark = function () {
   bookmarksView.render(model.state.bookmarks);
 };
 
+const controlBookmarks = function () {
+  //take bookmarks view and render it
+  bookmarksView.render(model.state.bookmarks);
+};
+
 const init = function () {
+  bookmarksView.addHandlerRender(controlBookmarks);
   recipeView.addHandlerRender(controlRecipes);
   recipeView.addHandlerUpdateServings(controlServings);
   recipeView.addHandlerAddBookmark(controlAddBookmark);

@@ -16,6 +16,7 @@ class PaginationView extends View {
     });
   }
   _generateMarkup() {
+    //data gets passed into the render method which is on the main view module/class every other view inherits it
     const curPage = this._data.page; //data is the state.search object page gets update through getsearch results method
     //render method will call this
     //num of results divided by number of results per page

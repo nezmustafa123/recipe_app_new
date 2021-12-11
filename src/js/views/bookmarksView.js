@@ -9,6 +9,10 @@ class BookmarksView extends View {
     "No bookmarks added, bookmark a recipe to add to bookmarks list.";
   _searchMessage = "";
 
+  addHandlerRender(handler) {
+    //page load call handler
+    window.addEventListener("load", handler);
+  }
   _generateMarkup() {
     //needs this method to user in render method
     console.log(this._data); //loop through create string with preview blocks for each data result

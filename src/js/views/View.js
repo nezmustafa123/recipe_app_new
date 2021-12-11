@@ -12,7 +12,7 @@ export default class View {
       //if no dadta or if there is data but is empty array
       return this.renderError(); //data still comes back as empty array
     this._data = data;
-    const markup = this._generateMarkup();
+    const markup = this._generateMarkup(); //generate markup is different for each view
 
     if (!render) return markup;
     this._clear(); //run clear method here
@@ -31,6 +31,7 @@ export default class View {
     // console.log(curElements);
     // console.log(newElements); //compare new dom to current dom
     newElements.forEach((newEl, i) => {
+      //replace text in elements that already exist
       //loop over two arrays at the same time give cur element same index
       const curEl = curElements[i];
       //console.log(curEl, newEl.isEqualNode(curEl)); //compare nodes current one with old one
