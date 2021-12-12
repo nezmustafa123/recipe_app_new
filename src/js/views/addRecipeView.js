@@ -14,6 +14,7 @@ class AddRecipeView extends View {
     //run funciton as soon as object created
     super(); //use super because its a child class
     this._addHandlerShowWindow();
+    this._addHandlerHideWindow();
   }
 
   toggleWindow() {
@@ -30,6 +31,23 @@ class AddRecipeView extends View {
     //bind correct 'this' keyword this keyword points to correct object
   }
 
+  _addHandlerHideWindow() {
+    this._btnClose.addEventListener(
+      "click",
+      //this keyword bound to the element the handler is attached to
+      this.toggleWindow.bind(this)
+    );
+    this._overlay.addEventListener("click", this.toggleWindow.bind(this)); //use toggle window again
+  }
+
+  addHandlerUpload(handler) {
+    this._parentElement.addEventListener("submit", function (e) {
+      //listen for event on parent element using event delegation
+      e.preventDefault(); //form data pass in element that is form in this case it's this keyworf
+      const data = [...new FormData(this)]; //spread operator give array with all the fields with data in there
+      handler(data);
+    });
+  }
   _generateMarkup() {}
 }
 
