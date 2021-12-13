@@ -139,3 +139,9 @@ const clearBookmarks = function () {
   localStorage.clear("bookmarks");
 };
 // clearBookmarks();
+
+export const uploadRecipe = async function (newRecipe) {
+  //take raw input data and transform it into same format data get out of api
+  console.log();
+  // const ingredients = Object.entries(newRecipe).filter(entry => )
+};

@@ -44,7 +44,8 @@ class AddRecipeView extends View {
     this._parentElement.addEventListener("submit", function (e) {
       //listen for event on parent element using event delegation
       e.preventDefault(); //form data pass in element that is form in this case it's this keyworf
-      const data = [...new FormData(this)]; //spread operator give array with all the fields with data in there
+      const dataArr = [...new FormData(this)]; //spread operator give array with all the fields with data in there
+      const data = Object.fromEntries(dataArr); //convert an array of entried convert it into an object
       handler(data);
     });
   }
