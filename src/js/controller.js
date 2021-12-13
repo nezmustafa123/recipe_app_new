@@ -116,11 +116,16 @@ const controlBookmarks = function () {
   bookmarksView.render(model.state.bookmarks);
 };
 
-const controlAddRecipe = function (newRecipe) {
-  console.log(newRecipe);
+const controlAddRecipe = async function (newRecipe) {
+  //await the promise inside the async function handle it as a function that returns promise so it gets caught
   //upload the new recipe data
-
-  model.uploadRecipe(newRecipe);
+  try {
+    await model.uploadRecipe(newRecipe); //if error go to catch block
+  } catch (err) {
+    //catch error from throw error
+    console.error("X_X", err);
+    addRecipeView.renderError(err.message);
+  }
 };
 
 const init = function () {

@@ -71,7 +71,7 @@ export const loadSearchResults = async function (query) {
       };
     });
     state.search.page = 1; //reset the page in the state to one after loading the search results
-    console.log(state.search.page);
+    console.log(state.search.results);
   } catch (err) {
     console.error(`${err} xxxx`);
     throw err;
@@ -141,7 +141,32 @@ const clearBookmarks = function () {
 // clearBookmarks();
 
 export const uploadRecipe = async function (newRecipe) {
+  //send recipe data to forkify api will make request to api so async
   //take raw input data and transform it into same format data get out of api
-  console.log();
-  // const ingredients = Object.entries(newRecipe).filter(entry => )
+  // console.log(newRecipe);
+  //oppodite of objectfromentries
+  //first element of the array
+  //create array of ingredients by filtering the elements with the first entry being ingredient second part should not be empty
+  try {
+    const ingredients = Object.entries(newRecipe)
+      .filter(
+        //turn object into array with key value first one starts with ingredient second one exists
+        (entry) => entry[0].startsWith("ingredient") && entry[1] !== ""
+      )
+      .map((ing) => {
+        const ingArr = ing[1].replaceAll(" ", "").split(",");
+        console.log(ingArr);
+        if (ingArr.length !== 3)
+          throw new Error(
+            "Wrong ingredient format, please correct it to the proper format."
+          );
+        const [quantity, unit, description] = ingArr;
+
+        return { quantity: quantity ? +quantity : null, unit, description }; //if there is quantity convert to number
+        // return ings; //putting into variable so have to return it
+      });
+    console.log(ingredients);
+  } catch (err) {
+    throw err;
+  }
 };
