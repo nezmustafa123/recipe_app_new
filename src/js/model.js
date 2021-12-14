@@ -1,6 +1,7 @@
 import { runtime } from "../../node_modules/regenerator-runtime";
 import { API_URL, RES_PER_PAGE } from "./config.js";
 import { getJSON } from "./helpers.js";
+import { sendJSON } from "./helpers.js";
 
 //refactor into architecture
 export const state = {
@@ -144,7 +145,7 @@ export const uploadRecipe = async function (newRecipe) {
   //send recipe data to forkify api will make request to api so async
   //take raw input data and transform it into same format data get out of api
   // console.log(newRecipe);
-  //oppodite of objectfromentries
+  //oppodste of objectfromentries
   //first element of the array
   //create array of ingredients by filtering the elements with the first entry being ingredient second part should not be empty
   try {
@@ -165,7 +166,18 @@ export const uploadRecipe = async function (newRecipe) {
         return { quantity: quantity ? +quantity : null, unit, description }; //if there is quantity convert to number
         // return ings; //putting into variable so have to return it
       });
-    console.log(ingredients);
+
+    const recipe = {
+      //create recipe object to be uploaded opposite of the state one
+      title: newRecipe.title,
+      source_url: newRecipe.sourceUrl,
+      image_url: newRecipe.image,
+      publisher: newRecipe.publisher,
+      cooking_time: +newRecipe.cookingTIme,
+      servings: +newRecipe.servings,
+      ingredients, //ingredients array
+    };
+    console.log(recipe);
   } catch (err) {
     throw err;
   }
