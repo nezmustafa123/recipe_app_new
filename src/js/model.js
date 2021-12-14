@@ -1,7 +1,6 @@
 import { runtime } from "../../node_modules/regenerator-runtime";
-import { API_URL, RES_PER_PAGE } from "./config.js";
-import { getJSON } from "./helpers.js";
-import { sendJSON } from "./helpers.js";
+import { API_URL, RES_PER_PAGE, API_KEY } from "./config.js";
+import { getJSON, sendJSON } from "./helpers.js";
 
 //refactor into architecture
 export const state = {
@@ -18,25 +17,27 @@ export const state = {
   //add a book mark push recipe into array
 };
 
+const createRecipeObject = function (data) {
+  //create new object get rid of underscores
+  const { recipe } = data.data; //recipe object destructure it
+  console.log(recipe);
+  state.recipe = {
+    //update state object and manipulate directly
+    id: recipe.id,
+    title: recipe.title,
+    publisher: recipe.publisher,
+    sourceUrl: recipe.source_url,
+    image: recipe.image_url,
+    servings: recipe.servings,
+    cookingTime: recipe.cooking_time,
+    ingredients: recipe.ingredients,
+  };
+};
 export const loadRecipe = async function (id) {
   try {
     //specific recipe with spcefic id
     const data = await getJSON(`${API_URL}${id}`); //resolved value will be data and stored into data
 
-    //create new object get rid of underscores
-    const { recipe } = data.data; //recipe object destructure it
-    console.log(recipe);
-    state.recipe = {
-      //update state object and manipulate directly
-      id: recipe.id,
-      title: recipe.title,
-      publisher: recipe.publisher,
-      sourceUrl: recipe.source_url,
-      image: recipe.image_url,
-      servings: recipe.servings,
-      cookingTime: recipe.cooking_time,
-      ingredients: recipe.ingredients,
-    };
     //check to see if same recipe in bookmarks array
     if (state.bookmarks.some((bookmark) => bookmark.id === id)) {
       //equal to the id recieved in the function
@@ -173,11 +174,13 @@ export const uploadRecipe = async function (newRecipe) {
       source_url: newRecipe.sourceUrl,
       image_url: newRecipe.image,
       publisher: newRecipe.publisher,
-      cooking_time: +newRecipe.cookingTIme,
+      cooking_time: +newRecipe.cookingTime,
       servings: +newRecipe.servings,
       ingredients, //ingredients array
     };
-    console.log(recipe);
+    // console.log(recipe);
+    const data = await sendJSON(`${API_URL}?key=${API_KEY}`, recipe); //sends recipe back as a promise to have to store it
+    console.log(data);
   } catch (err) {
     throw err;
   }
