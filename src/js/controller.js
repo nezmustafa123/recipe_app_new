@@ -1,4 +1,5 @@
 import * as model from "./model.js";
+import { MODAL_CLOSE_SEC } from "./config.js";
 import recipeView from "./views/recipeView.js";
 import searchView from "./views/searchView.js";
 import resultsView from "./views/resultsView.js";
@@ -120,13 +121,21 @@ const controlAddRecipe = async function (newRecipe) {
   //await the promise inside the async function handle it as a function that returns promise so it gets caught
   //upload the new recipe data
   try {
+    //show loading spinner
+    addRecipeView.renderSpinner();
+
     await model.uploadRecipe(newRecipe); //if error go to catch block
     console.log(model.state.recipe);
 
     //Render recipe
     recipeView.render(model.state.recipe);
-    //close form window using set timeout ti implement sucess message
-    setTimeout(function () {});
+
+    //success message
+    addRecipeView.renderMessage();
+    //close form window using set timeout to implement sucess message
+    setTimeout(function () {
+      addRecipeView.toggleWindow();
+    }, MODAL_CLOSE_SEC * 1000);
   } catch (err) {
     //catch error from throw error
     console.error("X_X", err);

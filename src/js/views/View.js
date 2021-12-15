@@ -93,7 +93,7 @@ export default class View {
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
 
-  renderMessage(message = this_searchMessage) {
+  renderMessage(message = this._searchMessage) {
     //defailt error message
     //replace with icons variable
     const markup = `
@@ -106,7 +106,7 @@ export default class View {
         <p>${message}</p>
       </div> 
       `;
-    this_clear();
-    this_parentElement.insertAdjacentHTML("afterbegin", markup);
+    this._clear();
+    this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
 }
