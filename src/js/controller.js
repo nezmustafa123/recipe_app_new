@@ -121,6 +121,12 @@ const controlAddRecipe = async function (newRecipe) {
   //upload the new recipe data
   try {
     await model.uploadRecipe(newRecipe); //if error go to catch block
+    console.log(model.state.recipe);
+
+    //Render recipe
+    recipeView.render(model.state.recipe);
+    //close form window using set timeout ti implement sucess message
+    setTimeout(function () {});
   } catch (err) {
     //catch error from throw error
     console.error("X_X", err);

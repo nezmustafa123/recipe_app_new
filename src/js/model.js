@@ -18,10 +18,11 @@ export const state = {
 };
 
 const createRecipeObject = function (data) {
+  //new function
   //create new object get rid of underscores
   const { recipe } = data.data; //recipe object destructure it
-  console.log(recipe);
-  state.recipe = {
+  return {
+    //return object
     //update state object and manipulate directly
     id: recipe.id,
     title: recipe.title,
@@ -31,13 +32,16 @@ const createRecipeObject = function (data) {
     servings: recipe.servings,
     cookingTime: recipe.cooking_time,
     ingredients: recipe.ingredients,
+    ...(recipe.key && { key: recipe.key }), // most recipes loaded won't have a key and operator shortcircuits if property exxists second part is returned which is object then values get spread
+    //key: recipe.key (same as this)
   };
 };
 export const loadRecipe = async function (id) {
   try {
     //specific recipe with spcefic id
     const data = await getJSON(`${API_URL}${id}`); //resolved value will be data and stored into data
-
+    console.log(data);
+    state.recipe = createRecipeObject(data);
     //check to see if same recipe in bookmarks array
     if (state.bookmarks.some((bookmark) => bookmark.id === id)) {
       //equal to the id recieved in the function
@@ -180,7 +184,8 @@ export const uploadRecipe = async function (newRecipe) {
     };
     // console.log(recipe);
     const data = await sendJSON(`${API_URL}?key=${API_KEY}`, recipe); //sends recipe back as a promise to have to store it
-    console.log(data);
+    state.recipe = createRecipeObject(data); //store into state
+    addBookMark(state.recipe);
   } catch (err) {
     throw err;
   }
