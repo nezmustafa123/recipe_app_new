@@ -125,13 +125,20 @@ const controlAddRecipe = async function (newRecipe) {
     addRecipeView.renderSpinner();
 
     await model.uploadRecipe(newRecipe); //if error go to catch block
-    console.log(model.state.recipe);
+    // console.log(model.state.recipe);
 
     //Render recipe
     recipeView.render(model.state.recipe);
 
     //success message
     addRecipeView.renderMessage();
+
+    //Render bookmark view
+    bookmarksView.render(model.state.bookmarks); //not using update as want to render new element
+
+    //Change ID in URL use history api change url without reloading page
+    window.history.pushState(null, "", `#${model.state.recipe.id}`);
+    //pushstate, title, url
     //close form window using set timeout to implement sucess message
     setTimeout(function () {
       addRecipeView.toggleWindow();

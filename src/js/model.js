@@ -1,7 +1,7 @@
 import { runtime } from "../../node_modules/regenerator-runtime";
 import { API_URL, RES_PER_PAGE, API_KEY } from "./config.js";
-import { getJSON, sendJSON } from "./helpers.js";
-
+// import { getJSON, sendJSON } from "./helpers.js";
+import { AJAX } from "./helpers.js";
 //refactor into architecture
 export const state = {
   //contains all data to build application
@@ -39,7 +39,7 @@ const createRecipeObject = function (data) {
 export const loadRecipe = async function (id) {
   try {
     //specific recipe with spcefic id
-    const data = await getJSON(`${API_URL}${id}`); //resolved value will be data and stored into data
+    const data = await AJAX(`${API_URL}${id}`); //resolved value will be data and stored into data
     console.log(data);
     state.recipe = createRecipeObject(data);
     //check to see if same recipe in bookmarks array
@@ -64,7 +64,7 @@ export const loadSearchResults = async function (query) {
   //search based off a search query
   try {
     state.search.query = query;
-    const data = await getJSON(`${API_URL}?search=${query}`); //object is called data with data property that is array with info
+    const data = await AJAX(`${API_URL}?search=${query}`); //object is called data with data property that is array with info
     console.log(data); //recipes returned from query
 
     state.search.results = data.data.recipes.map((rec) => {
@@ -183,7 +183,8 @@ export const uploadRecipe = async function (newRecipe) {
       ingredients, //ingredients array
     };
     // console.log(recipe);
-    const data = await sendJSON(`${API_URL}?key=${API_KEY}`, recipe); //sends recipe back as a promise to have to store it
+    const data = await AJAX(`${API_URL}?key=${API_KEY}`, recipe); //sends recipe back as a promise to have to store it
+    console.log(data);
     state.recipe = createRecipeObject(data); //store into state
     addBookMark(state.recipe);
   } catch (err) {
