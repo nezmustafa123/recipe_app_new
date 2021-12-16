@@ -39,7 +39,7 @@ const createRecipeObject = function (data) {
 export const loadRecipe = async function (id) {
   try {
     //specific recipe with spcefic id
-    const data = await AJAX(`${API_URL}${id}`); //resolved value will be data and stored into data
+    const data = await AJAX(`${API_URL}${id}?key=${API_KEY}`); //resolved value will be data and stored into data
     console.log(data);
     state.recipe = createRecipeObject(data);
     //check to see if same recipe in bookmarks array
@@ -64,8 +64,8 @@ export const loadSearchResults = async function (query) {
   //search based off a search query
   try {
     state.search.query = query;
-    const data = await AJAX(`${API_URL}?search=${query}`); //object is called data with data property that is array with info
-    console.log(data); //recipes returned from query
+    const data = await AJAX(`${API_URL}?search=${query}&key=${API_KEY}`); //object is called data with data property that is array with info
+    console.log(data); //recipes returned from query, load all receipes including one containing key
 
     state.search.results = data.data.recipes.map((rec) => {
       //loop throuhg the array and add results to results array
@@ -73,7 +73,8 @@ export const loadSearchResults = async function (query) {
         id: rec.id,
         title: rec.title,
         publisher: rec.publisher,
-        image: rec.image_url,
+        image: rec.image_url, //add key to the search results
+        ...(rec.key && { key: rec.key }),
       };
     });
     state.search.page = 1; //reset the page in the state to one after loading the search results
@@ -160,7 +161,8 @@ export const uploadRecipe = async function (newRecipe) {
         (entry) => entry[0].startsWith("ingredient") && entry[1] !== ""
       )
       .map((ing) => {
-        const ingArr = ing[1].replaceAll(" ", "").split(",");
+        const ingArr = ing[1].split(",").map((el) => el.trim()); //split the string into multiple parts returning new array loop over aray trim each element
+        // const ingArr = ing[1].replaceAll(" ", "").split(",");
         console.log(ingArr);
         if (ingArr.length !== 3)
           throw new Error(
