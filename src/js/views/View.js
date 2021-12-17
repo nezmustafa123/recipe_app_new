@@ -5,6 +5,16 @@ export default class View {
   //create other views as instances of it
   //export class itself will not create instance of it
   _data;
+
+  /**
+   * Render the received objected to the DOM
+   * @param {Object | Object []} data to be rendered (e.g recipe)
+   * @param {boolean} [render=true] if false, create markup string insread of rendering to the DOM
+   * @returns {undefined | string} A markup string is returned if render=false
+   * @this {Object} view instance
+   * @author Nez Mustafa
+   */
+
   render(data, render = true) {
     //all views will have this
     //when render method called and recieves data check that it exists
