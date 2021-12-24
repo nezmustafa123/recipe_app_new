@@ -16,14 +16,14 @@
   background-color: rgb(255, 255, 255);
   border-radius: 10rem;
   display: flex;
-  width: 30rem;
+  width: 35rem;
   align-items: center;
   // padding-left: 3rem;
   transition: all 0.3s;
 
   &:focus-within {
     // transform: translateY(-6px);
-    width: 45rem;
+    width: 65rem;
     box-shadow: 0 0.7rem 3rem rgba($color-grey-dark-1, 0.08);
   }
 
@@ -55,7 +55,7 @@
   &__btn {
     font-weight: 600;
     font-family: inherit;
-    width: 30rem;
+    width: 20rem;
   }
 }
 
