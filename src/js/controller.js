@@ -150,6 +150,10 @@ const controlAddRecipe = async function (newRecipe) {
   }
 };
 
+const newFeature = function () {
+  console.log("Welcome to the application!");
+};
+
 const init = function () {
   //publisher subscriber patterrn
   bookmarksView.addHandlerRender(controlBookmarks);
@@ -158,8 +162,7 @@ const init = function () {
   recipeView.addHandlerAddBookmark(controlAddBookmark);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
-  addRecipeView.addHandlerUpload(controlAddRecipe);
-  console.log("Welcome to the application, testing testing 123");
+  newFeature();
 };
 init();
 //init function runds and runs addHAndler render handlr render listes for events
