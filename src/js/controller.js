@@ -159,7 +159,7 @@ const init = function () {
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
   addRecipeView.addHandlerUpload(controlAddRecipe);
-  console.log("Welcome");
+  console.log("Welcome to the application, testing testing 123");
 };
 init();
 //init function runds and runs addHAndler render handlr render listes for events
